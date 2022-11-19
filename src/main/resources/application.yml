@@ -1,0 +1,7 @@
+server:
+  port: 8021
+
+spring:
+  data:
+    mongodb:
+      database: my_chess_db
