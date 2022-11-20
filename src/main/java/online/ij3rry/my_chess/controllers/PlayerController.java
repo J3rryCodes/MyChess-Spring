@@ -4,10 +4,7 @@ import online.ij3rry.my_chess.dao.PlayerDAO;
 import online.ij3rry.my_chess.dto.PlayerDTO;
 import online.ij3rry.my_chess.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -20,5 +17,10 @@ public class PlayerController {
     @PostMapping("/create")
     private Mono<PlayerDAO> createPlayer(@RequestBody PlayerDTO playerDTO){
         return playerService.createPlayer(playerDTO);
+    }
+
+    @GetMapping("/find/{name}")
+    private Mono<PlayerDAO> findPlayerByName(@PathVariable String name){
+        return playerService.findPlayerByName(name);
     }
 }

@@ -21,4 +21,8 @@ public class PlayerServiceImpl implements PlayerService {
         PlayerDAO playerDAO = new PlayerDAO(UUID.randomUUID(),playerDTO.name());
         return playerRepository.save(playerDAO);
     }
+    @Override
+    public Mono<PlayerDAO> findPlayerByName(String name){
+        return playerRepository.findByName(name);
+    }
 }
