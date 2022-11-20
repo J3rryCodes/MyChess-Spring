@@ -7,4 +7,6 @@ import reactor.core.publisher.Mono;
 public interface PlayerService {
 
     public Mono<PlayerDAO> createPlayer(PlayerDTO playerDTO);
+
+    public Mono<PlayerDAO> findPlayerByName(String name);
 }

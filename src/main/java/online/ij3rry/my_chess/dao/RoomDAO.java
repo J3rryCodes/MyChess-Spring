@@ -1,13 +1,21 @@
 package online.ij3rry.my_chess.dao;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Document
+@Document(value = "room")
 @AllArgsConstructor
+@ToString
+@Getter
+@Setter
 public class RoomDAO {
 
     @Id
@@ -15,4 +23,5 @@ public class RoomDAO {
     private String roomName;
     private PlayerDAO playerOne;
     private PlayerDAO playerTwo;
+    private LocalDateTime created;
 }
