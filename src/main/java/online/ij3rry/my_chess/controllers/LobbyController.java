@@ -20,6 +20,6 @@ public class LobbyController {
 
     @GetMapping("/join/{playerId}")
     private Mono<RoomDAO> joinTheLobby(@PathVariable UUID playerId){
-        return lobbyService.joinTheBobby(playerId);
+        return lobbyService.joinTheLobby(playerId);
     }
 }

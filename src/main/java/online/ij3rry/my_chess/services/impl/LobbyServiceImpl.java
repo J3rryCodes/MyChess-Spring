@@ -29,7 +29,7 @@ public class LobbyServiceImpl implements LobbyService {
     private BoardService boardService;
 
     @Override
-    public Mono<RoomDAO> joinTheBobby(UUID playerId) {
+    public Mono joinTheLobby(UUID playerId) {
         log.info("player id {} trying to join",playerId);
         return playerRepository.findById(playerId)
                 .flatMap(playerDAO -> roomRepository.findTopByOrderByCreatedDesc().next().flatMap(roomDAO -> {
