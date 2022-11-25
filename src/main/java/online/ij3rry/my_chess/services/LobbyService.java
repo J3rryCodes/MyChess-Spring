@@ -7,5 +7,5 @@ import java.util.UUID;
 
 public interface LobbyService {
 
-    public Mono<RoomDAO> joinTheBobby(UUID playerId);
+    public Mono joinTheLobby(UUID playerId);
 }
