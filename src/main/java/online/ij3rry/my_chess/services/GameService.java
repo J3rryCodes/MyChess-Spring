@@ -1,5 +1,6 @@
 package online.ij3rry.my_chess.services;
 
+import online.ij3rry.my_chess.dao.MovementDAO;
 import online.ij3rry.my_chess.dao.RoomDAO;
 import online.ij3rry.my_chess.dto.SelectionDTO;
 import reactor.core.publisher.Flux;
@@ -11,4 +12,6 @@ public interface GameService {
 
     public Flux<RoomDAO> getGameRoomById(UUID roomId);
     public Mono<Boolean> selectPosition(SelectionDTO selectionDTO);
+
+    public Flux<MovementDAO> getMovements(UUID boardId);
 }

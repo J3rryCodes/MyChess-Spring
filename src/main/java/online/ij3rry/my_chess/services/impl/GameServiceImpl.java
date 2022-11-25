@@ -41,6 +41,12 @@ public class GameServiceImpl implements GameService {
         return Mono.just(Boolean.TRUE);
     }
 
+    @Override
+    public Flux<MovementDAO> getMovements(UUID boardId) {
+        System.out.println("HERE ---- ");
+        return movementRepository.findByBoardId(boardId);
+    }
+
     private void updateMovementTable(SelectionDTO selectionDTO){
         MovementDAO movementDAO = new MovementDAO();
         movementDAO.setId(UUID.randomUUID());
@@ -48,6 +54,7 @@ public class GameServiceImpl implements GameService {
         movementDAO.setFromLocation(selectionDTO.fromLocation());
         movementDAO.setToLocation(selectionDTO.toLocation());
         movementDAO.setRoomId(selectionDTO.roomId());
+        movementDAO.setBoardId(selectionDTO.boardId());
         movementRepository.save(movementDAO).subscribe().dispose();
     }
 }
