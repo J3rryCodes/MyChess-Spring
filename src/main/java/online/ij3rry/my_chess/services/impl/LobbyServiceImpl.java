@@ -3,6 +3,7 @@ package online.ij3rry.my_chess.services.impl;
 import lombok.extern.slf4j.Slf4j;
 import online.ij3rry.my_chess.dao.PlayerDAO;
 import online.ij3rry.my_chess.dao.RoomDAO;
+import online.ij3rry.my_chess.dto.RoomDTO;
 import online.ij3rry.my_chess.repositories.BoardRepository;
 import online.ij3rry.my_chess.repositories.PlayerRepository;
 import online.ij3rry.my_chess.repositories.RoomRepository;
@@ -30,18 +31,17 @@ public class LobbyServiceImpl implements LobbyService {
 
     @Override
     public Mono joinTheLobby(UUID playerId) {
-        log.info("player id {} trying to join",playerId);
+        log.info("player id {} trying to join", playerId);
         return playerRepository.findById(playerId)
                 .flatMap(playerDAO -> roomRepository.findTopByOrderByCreatedDesc().next().flatMap(roomDAO -> {
-                    if(roomDAO.getWhitePlayer().getId().equals(playerId)){
+                    if (roomDAO.getWhitePlayer().getId().equals(playerId)) {
                         return Mono.just("Player already in the lobby");
-                    }
-                    else if (roomDAO.getBlackPlayer() == null) {
+                    } else if (roomDAO.getBlackPlayer() == null) {
                         return updateRoom(playerDAO, roomDAO);
                     } else {
                         return createNewRoom(playerDAO);
                     }
-                }).switchIfEmpty(createNewRoom(playerDAO))).switchIfEmpty(Mono.just("Player "+playerId+" not found!"));
+                }).switchIfEmpty(createNewRoom(playerDAO))).switchIfEmpty(Mono.just("Player " + playerId + " not found!"));
     }
 
     private Mono updateRoom(PlayerDAO playerDAO, RoomDAO roomDAO) {
@@ -50,8 +50,8 @@ public class LobbyServiceImpl implements LobbyService {
         return roomRepository.save(roomDAO);
     }
 
-    private Mono<RoomDAO> createNewRoom(PlayerDAO playerDAO) {
+    private Mono<RoomDTO> createNewRoom(PlayerDAO playerDAO) {
         log.info("Creating new room with player id : {}", playerDAO.getId());
-        return boardService.initializeBoard().flatMap(boardDAO -> roomRepository.save(new RoomDAO(UUID.randomUUID(), "", playerDAO, null, LocalDateTime.now(),boardDAO.getId())));
+        return boardService.initializeBoard().flatMap(boardDAO -> roomRepository.save(new RoomDAO(UUID.randomUUID(), "", playerDAO, null, LocalDateTime.now(), boardDAO.getId())).map(RoomDAO::toRoomDTO));
     }
 }

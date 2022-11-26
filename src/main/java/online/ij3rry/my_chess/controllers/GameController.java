@@ -1,7 +1,7 @@
 package online.ij3rry.my_chess.controllers;
 
-import online.ij3rry.my_chess.dao.MovementDAO;
-import online.ij3rry.my_chess.dao.RoomDAO;
+import online.ij3rry.my_chess.dto.MovementDTO;
+import online.ij3rry.my_chess.dto.RoomDTO;
 import online.ij3rry.my_chess.dto.SelectionDTO;
 import online.ij3rry.my_chess.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class GameController {
 
 
     @GetMapping(value = "/room/{roomId}")
-    private Flux<RoomDAO> getRoomByRoomId(@PathVariable UUID roomId){
+    private Flux<RoomDTO> getRoomByRoomId(@PathVariable UUID roomId){
         return gameService.getGameRoomById(roomId);
     }
 
@@ -31,7 +31,7 @@ public class GameController {
     }
 
     @GetMapping(value = "/movements/{boardId}",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    private Flux<MovementDAO> getMovements(@PathVariable UUID boardId){
+    private Flux<MovementDTO> getMovements(@PathVariable UUID boardId){
         return gameService.getMovements(boardId);
     }
 }

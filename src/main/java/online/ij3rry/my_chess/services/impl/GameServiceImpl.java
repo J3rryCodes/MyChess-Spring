@@ -2,10 +2,15 @@ package online.ij3rry.my_chess.services.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import online.ij3rry.my_chess.dao.MovementDAO;
+import online.ij3rry.my_chess.dao.PlayerDAO;
 import online.ij3rry.my_chess.dao.RoomDAO;
+import online.ij3rry.my_chess.dto.MovementDTO;
+import online.ij3rry.my_chess.dto.PlayerDTO;
+import online.ij3rry.my_chess.dto.RoomDTO;
 import online.ij3rry.my_chess.dto.SelectionDTO;
 import online.ij3rry.my_chess.repositories.BoardRepository;
 import online.ij3rry.my_chess.repositories.MovementRepository;
+import online.ij3rry.my_chess.repositories.PlayerRepository;
 import online.ij3rry.my_chess.repositories.RoomRepository;
 import online.ij3rry.my_chess.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,31 +31,35 @@ public class GameServiceImpl implements GameService {
     private BoardRepository boardRepository;
 
     @Autowired
+    private PlayerRepository playerRepository;
+
+    @Autowired
     private MovementRepository movementRepository;
 
     @Override
-    public Flux<RoomDAO> getGameRoomById(UUID roomId) {
-        return roomRepository.findByRoomId(roomId);
+    public Flux<RoomDTO> getGameRoomById(UUID roomId) {
+        return roomRepository.findByRoomId(roomId).map(RoomDAO::toRoomDTO);
     }
 
     @Override
     public Mono<Boolean> selectPosition(SelectionDTO selectionDTO) {
         log.info("Player ID {} trying moving from {} to {} in room ID {}",selectionDTO.playerId(),selectionDTO.fromLocation(),selectionDTO.toLocation(),selectionDTO.roomId());
-        // add validation logic here
-        updateMovementTable(selectionDTO);
-        return Mono.just(Boolean.TRUE);
+        return playerRepository.findById(selectionDTO.playerId()).flatMap(playerDAO -> {
+            // add validation logic here
+            updateMovementTable(selectionDTO,playerDAO);
+            return Mono.just(Boolean.TRUE);
+        }).switchIfEmpty(Mono.just(Boolean.FALSE));
     }
 
     @Override
-    public Flux<MovementDAO> getMovements(UUID boardId) {
-        System.out.println("HERE ---- ");
-        return movementRepository.findByBoardId(boardId);
+    public Flux<MovementDTO> getMovements(UUID boardId) {
+        return movementRepository.findByBoardId(boardId).map(MovementDAO::toMovementDTO);
     }
 
-    private void updateMovementTable(SelectionDTO selectionDTO){
+    private void updateMovementTable(SelectionDTO selectionDTO, PlayerDAO playerDAO){
         MovementDAO movementDAO = new MovementDAO();
         movementDAO.setId(UUID.randomUUID());
-        movementDAO.setPlayerId(selectionDTO.playerId());
+        movementDAO.setPlayer(playerDAO);
         movementDAO.setFromLocation(selectionDTO.fromLocation());
         movementDAO.setToLocation(selectionDTO.toLocation());
         movementDAO.setRoomId(selectionDTO.roomId());

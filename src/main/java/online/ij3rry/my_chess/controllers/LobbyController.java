@@ -1,6 +1,7 @@
 package online.ij3rry.my_chess.controllers;
 
 import online.ij3rry.my_chess.dao.RoomDAO;
+import online.ij3rry.my_chess.dto.RoomDTO;
 import online.ij3rry.my_chess.services.LobbyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ public class LobbyController {
     private LobbyService lobbyService;
 
     @GetMapping("/join/{playerId}")
-    private Mono<RoomDAO> joinTheLobby(@PathVariable UUID playerId){
+    private Mono<RoomDTO> joinTheLobby(@PathVariable UUID playerId){
         return lobbyService.joinTheLobby(playerId);
     }
 }
