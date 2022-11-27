@@ -10,13 +10,19 @@
 	</parent>
 	<groupId>online.ij3rry</groupId>
 	<artifactId>my_chess</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-RC1</version>
 	<name>my_chess</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>19</java.version>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>online.ij3rry</groupId>
+			<artifactId>chess_validator</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>

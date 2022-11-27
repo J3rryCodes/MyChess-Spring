@@ -15,11 +15,12 @@ public class MovementDAO {
     private PlayerDAO player;
     private List<Integer> fromLocation;
     private List<Integer> toLocation;
+    private Boolean isValidMove;
     private UUID roomId;
     private UUID boardId;
     
     public MovementDTO toMovementDTO(){
         PlayerDTO playerDTO = new PlayerDTO(this.getPlayer().getName());
-        return new MovementDTO(this.getId(),playerDTO,this.getFromLocation(),this.getToLocation(),this.getRoomId(),this.getBoardId());
+        return new MovementDTO(this.getId(),playerDTO,this.getFromLocation(),this.getToLocation(),this.getRoomId(),this.getBoardId(),this.getIsValidMove());
     }
 }

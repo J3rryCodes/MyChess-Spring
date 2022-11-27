@@ -1,17 +1,14 @@
 package online.ij3rry.my_chess.services.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import online.ij3rry.chess_validator.enums.CHESS_PIECES;
 import online.ij3rry.my_chess.dao.BoardDAO;
-import online.ij3rry.my_chess.dao.TileModel;
 import online.ij3rry.my_chess.repositories.BoardRepository;
 import online.ij3rry.my_chess.services.BoardService;
-import online.ij3rry.my_chess.utils.CHESS_PIECES;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -30,79 +27,79 @@ public class BoardServiceImpl implements BoardService {
         return boardRepository.save(boardDAO);
     }
 
-    private List<TileModel> createBoard(){
-        List<TileModel> tileModels = new ArrayList<>();
-        tileModels.add(new TileModel(0,0,CHESS_PIECES.R.ordinal()));
-        tileModels.add(new TileModel(0,1,CHESS_PIECES.N.ordinal()));
-        tileModels.add(new TileModel(0,2,CHESS_PIECES.B.ordinal()));
-        tileModels.add(new TileModel(0,3,CHESS_PIECES.K.ordinal()));
-        tileModels.add(new TileModel(0,4,CHESS_PIECES.Q.ordinal()));
-        tileModels.add(new TileModel(0,5,CHESS_PIECES.B.ordinal()));
-        tileModels.add(new TileModel(0,6,CHESS_PIECES.N.ordinal()));
-        tileModels.add(new TileModel(0,7,CHESS_PIECES.R.ordinal()));
+    private CHESS_PIECES[][] createBoard(){
+        CHESS_PIECES[][] tileModels = new CHESS_PIECES[8][8];
+        tileModels[0][0] = CHESS_PIECES.R;
+        tileModels[0][1] = CHESS_PIECES.N;
+        tileModels[0][2] = CHESS_PIECES.B;
+        tileModels[0][3] = CHESS_PIECES.K;
+        tileModels[0][4] = CHESS_PIECES.Q;
+        tileModels[0][5] = CHESS_PIECES.B;
+        tileModels[0][6] = CHESS_PIECES.N;
+        tileModels[0][7] = CHESS_PIECES.R;
 
-        tileModels.add(new TileModel(1,0,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(1,1,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(1,2,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(1,3,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(1,4,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(1,5,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(1,6,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(1,7,CHESS_PIECES.e.ordinal()));
+        tileModels[1][0] = CHESS_PIECES.P;
+        tileModels[1][1] = CHESS_PIECES.P;
+        tileModels[1][2] = CHESS_PIECES.P;
+        tileModels[1][3] = CHESS_PIECES.P;
+        tileModels[1][4] = CHESS_PIECES.P;
+        tileModels[1][5] = CHESS_PIECES.P;
+        tileModels[1][6] = CHESS_PIECES.P;
+        tileModels[1][7] = CHESS_PIECES.P;
 
-        tileModels.add(new TileModel(2,0,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(2,1,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(2,2,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(2,3,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(2,4,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(2,5,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(2,6,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(2,7,CHESS_PIECES.e.ordinal()));
+        tileModels[2][0] = CHESS_PIECES.e;
+        tileModels[2][1] = CHESS_PIECES.e;
+        tileModels[2][2] = CHESS_PIECES.e;
+        tileModels[2][3] = CHESS_PIECES.e;
+        tileModels[2][4] = CHESS_PIECES.e;
+        tileModels[2][5] = CHESS_PIECES.e;
+        tileModels[2][6] = CHESS_PIECES.e;
+        tileModels[2][7] = CHESS_PIECES.e;
 
-        tileModels.add(new TileModel(3,0,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(3,1,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(3,2,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(3,3,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(3,4,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(3,5,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(3,6,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(3,7,CHESS_PIECES.e.ordinal()));
+        tileModels[3][0] = CHESS_PIECES.e;
+        tileModels[3][1] = CHESS_PIECES.e;
+        tileModels[3][2] = CHESS_PIECES.e;
+        tileModels[3][3] = CHESS_PIECES.e;
+        tileModels[3][4] = CHESS_PIECES.e;
+        tileModels[3][5] = CHESS_PIECES.e;
+        tileModels[3][6] = CHESS_PIECES.e;
+        tileModels[3][7] = CHESS_PIECES.e;
 
-        tileModels.add(new TileModel(4,0,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(4,1,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(4,2,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(4,3,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(4,4,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(4,5,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(4,6,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(4,7,CHESS_PIECES.e.ordinal()));
+        tileModels[4][0] = CHESS_PIECES.e;
+        tileModels[4][1] = CHESS_PIECES.e;
+        tileModels[4][2] = CHESS_PIECES.e;
+        tileModels[4][3] = CHESS_PIECES.e;
+        tileModels[4][4] = CHESS_PIECES.e;
+        tileModels[4][5] = CHESS_PIECES.e;
+        tileModels[4][6] = CHESS_PIECES.e;
+        tileModels[4][7] = CHESS_PIECES.e;
 
-        tileModels.add(new TileModel(5,0,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(5,1,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(5,2,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(5,3,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(5,4,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(5,5,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(5,6,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(5,7,CHESS_PIECES.e.ordinal()));
+        tileModels[5][0] = CHESS_PIECES.e;
+        tileModels[5][1] = CHESS_PIECES.e;
+        tileModels[5][2] = CHESS_PIECES.e;
+        tileModels[5][3] = CHESS_PIECES.e;
+        tileModels[5][4] = CHESS_PIECES.e;
+        tileModels[5][5] = CHESS_PIECES.e;
+        tileModels[5][6] = CHESS_PIECES.e;
+        tileModels[5][7] = CHESS_PIECES.e;
 
-        tileModels.add(new TileModel(6,0,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(6,1,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(6,2,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(6,3,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(6,4,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(6,5,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(6,6,CHESS_PIECES.e.ordinal()));
-        tileModels.add(new TileModel(6,7,CHESS_PIECES.e.ordinal()));
+        tileModels[6][0] = CHESS_PIECES.p;
+        tileModels[6][1] = CHESS_PIECES.p;
+        tileModels[6][2] = CHESS_PIECES.p;
+        tileModels[6][3] = CHESS_PIECES.p;
+        tileModels[6][4] = CHESS_PIECES.p;
+        tileModels[6][5] = CHESS_PIECES.p;
+        tileModels[6][6] = CHESS_PIECES.p;
+        tileModels[6][7] = CHESS_PIECES.p;
 
-        tileModels.add(new TileModel(7,0,CHESS_PIECES.r.ordinal()));
-        tileModels.add(new TileModel(7,1,CHESS_PIECES.n.ordinal()));
-        tileModels.add(new TileModel(7,2,CHESS_PIECES.b.ordinal()));
-        tileModels.add(new TileModel(7,3,CHESS_PIECES.q.ordinal()));
-        tileModels.add(new TileModel(7,4,CHESS_PIECES.k.ordinal()));
-        tileModels.add(new TileModel(7,5,CHESS_PIECES.b.ordinal()));
-        tileModels.add(new TileModel(7,6,CHESS_PIECES.n.ordinal()));
-        tileModels.add(new TileModel(7,7,CHESS_PIECES.r.ordinal()));
+        tileModels[7][0] = CHESS_PIECES.r;
+        tileModels[7][1] = CHESS_PIECES.n;
+        tileModels[7][2] = CHESS_PIECES.b;
+        tileModels[7][3] = CHESS_PIECES.q;
+        tileModels[7][4] = CHESS_PIECES.k;
+        tileModels[7][5] = CHESS_PIECES.b;
+        tileModels[7][6] = CHESS_PIECES.n;
+        tileModels[7][7] = CHESS_PIECES.r;
         return  tileModels;
     }
 }
