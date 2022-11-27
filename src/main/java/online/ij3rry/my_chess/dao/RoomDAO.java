@@ -30,7 +30,7 @@ public class RoomDAO {
     
     public RoomDTO toRoomDTO(){
         PlayerDTO whitePlayer = new PlayerDTO(this.getWhitePlayer().getName());
-        PlayerDTO blackPlayer = new PlayerDTO(this.getBlackPlayer().getName());
+        PlayerDTO blackPlayer = new PlayerDTO( this.getBlackPlayer()==null ? "" : this.getBlackPlayer().getName());
         return new RoomDTO(this.getId(), this.getRoomName(), whitePlayer,blackPlayer,this.getCreated(),this.getBoardID());
     }
 }

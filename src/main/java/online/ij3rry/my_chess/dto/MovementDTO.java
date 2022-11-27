@@ -10,5 +10,5 @@ public record MovementDTO(UUID id,
                           List<Integer> fromLocation,
                           List<Integer> toLocation,
                           UUID roomId,
-                          UUID boardId) {
+                          UUID boardId, Boolean isValidMove) {
 }
