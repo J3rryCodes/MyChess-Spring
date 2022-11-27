@@ -4,4 +4,4 @@ server:
 spring:
   data:
     mongodb:
-      database: my_chess_db
+      database: chess_db
