@@ -18,9 +18,10 @@ public class MovementDAO {
     private Boolean isValidMove;
     private UUID roomId;
     private UUID boardId;
+    private int movementCount = 0;
     
     public MovementDTO toMovementDTO(){
         PlayerDTO playerDTO = new PlayerDTO(this.getPlayer().getName());
-        return new MovementDTO(this.getId(),playerDTO,this.getFromLocation(),this.getToLocation(),this.getRoomId(),this.getBoardId(),this.getIsValidMove());
+        return new MovementDTO(this.getId(),playerDTO,this.getFromLocation(),this.getToLocation(),this.getRoomId(),this.getBoardId(),this.getIsValidMove(),this.getMovementCount());
     }
 }
