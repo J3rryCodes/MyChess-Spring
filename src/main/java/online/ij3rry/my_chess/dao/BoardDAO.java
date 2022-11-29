@@ -12,4 +12,5 @@ import java.util.UUID;
 public class BoardDAO {
     UUID id;
     CHESS_PIECES[][] board;
+    int validMovementCount = 0;
 }

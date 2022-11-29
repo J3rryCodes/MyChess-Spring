@@ -50,9 +50,16 @@ public class GameServiceImpl implements GameService {
                 boolean isValidMove = validateChessMovement(selectionDTO, boardDAO);
 
                 MovementDAO movementDAO = createMovementDAO(selectionDTO, playerDAO, isValidMove);
-                movementRepository.save(movementDAO).subscribe();
 
-                if (isValidMove) boardRepository.save(boardDAO).subscribe();
+                if (isValidMove) {
+                    boardDAO.setValidMovementCount(boardDAO.getValidMovementCount()+1);
+                    movementDAO.setMovementCount(boardDAO.getValidMovementCount());
+                    boardRepository.save(boardDAO).subscribe();
+                }
+                else {
+                    movementDAO.setMovementCount(boardDAO.getValidMovementCount());
+                }
+                movementRepository.save(movementDAO).subscribe();
 
             }).subscribe();
             return Mono.just(Boolean.TRUE);
